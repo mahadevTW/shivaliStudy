@@ -32,7 +32,7 @@ class ListNode
 public class LinkedListDemo {
 
     ListNode start;
-    ListNode temp,temp1;
+    ListNode temp,temp1,temp2;
     ListNode current;
     Scanner scanner=new Scanner(System.in);
 
@@ -69,6 +69,7 @@ public class LinkedListDemo {
     {
         temp=new ListNode(data);
         temp.next=start;
+        start=temp;
         System.out.println("Element inserted at start is: "+ temp.getData());
     }
 
@@ -78,11 +79,17 @@ public class LinkedListDemo {
         System.out.println("Enter node after which you want to insert data");
         int index=scanner.nextInt();
         temp=start;
-        while (count!=index)
+        temp1=temp;
+        while (count!=index);
         {
             temp=temp.next;
+            temp1=temp.next.next;
+            count++;
         }
-        temp.next=new ListNode(data);
+
+        temp2.next=new ListNode(data);
+        temp.next=temp2;
+        temp2.next=temp1;
         System.out.println("Data in middle is :"+temp.getData());
     }
 
