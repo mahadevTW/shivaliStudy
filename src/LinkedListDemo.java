@@ -1,7 +1,4 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
-
-import java.lang.reflect.Constructor;
-import java.net.SocketPermission;
+import java.util.Scanner;
 
 /**
  * Created by shivali on 18-May-16.
@@ -9,27 +6,35 @@ import java.net.SocketPermission;
 
 class ListNode
 {
-    Object data;
+    private Object data;
     ListNode next;
 
     ListNode(Object data)
     {
-        this.data=data;
+        this.setData(data);
         next=null;
     }
 
     ListNode()
     {
-        data=null;
+        setData(null);
         next=null;
     }
 
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
 }
 public class LinkedListDemo {
 
     ListNode start;
-    ListNode temp;
+    ListNode temp,temp1;
     ListNode current;
+    Scanner scanner=new Scanner(System.in);
 
     LinkedListDemo()
     {
@@ -43,33 +48,78 @@ public class LinkedListDemo {
         {
             temp=new ListNode(data);
             start=temp;
-            System.out.println("Data in start node :"+start.data);
+            System.out.println("Data in start node :"+ temp.getData());
         }
 
         else {
-            temp = new ListNode(data);
+
+            temp1 = new ListNode(data);
             current = start;
             while (current.next != null) {
                 current = current.next;
             }
-            current.next = temp;
-            System.out.println("Data is: "+ current.data);
+            current.next = temp1;
+            System.out.println("Data is: " + temp1.getData());
         }
 
        // return start;
     }
 
-
-    public  Object  deleteE()
+    public void insertS(Object data)
     {
-        if(start==null) {
-            return null;
-        }
+        temp=new ListNode(data);
+        temp.next=start;
+        System.out.println("Element inserted at start is: "+ temp.getData());
+    }
 
-         temp=start;
-        start.next=start;
-        System.out.println("Deleted Data is: "+temp.data);
-        return temp.data;
+    public  void  insertM(Object data)
+    {
+        int count=0;
+        System.out.println("Enter node after which you want to insert data");
+        int index=scanner.nextInt();
+        temp=start;
+        while (count!=index)
+        {
+            temp=temp.next;
+        }
+        temp.next=new ListNode(data);
+        System.out.println("Data in middle is :"+temp.getData());
+    }
+
+    public void display()
+    {
+        current=start;
+        System.out.println("List is :");
+        while(current.next!=null)
+        {
+            current=current.next;
+            System.out.println(current.getData());
+        }
+    }
+
+
+    public  Object  deleteE(int index)
+    {
+        int count = 0;
+        if (start == null) {
+            return null;
+        } else
+        {
+
+            temp = start;
+            while (temp.next != null) {
+                if (count == index)
+                    break;
+                count++;
+                System.out.println("Count: "+count+"Index: "+index);
+                temp = temp.next;
+            };
+            System.out.println("Data to be deleted is:" + temp.getData());
+            temp.setData(null);
+            System.out.println("Data to be deleted is:" + temp.getData());
+
+            return temp;
+        }
 
 
     }
@@ -79,12 +129,20 @@ public class LinkedListDemo {
         LinkedListDemo l=new LinkedListDemo();
 
         System.out.println("We'r going to insert a new node in our list");
-       // l.insertE(10);
+        l.insertE(10);
         l.insertE(20);
-        l.insertE(30);
+        l.insertS(30);
+        l.insertE(40);
+        l.insertS(50);
+        l.display();
+        l.insertM(60);
 
-        System.out.println("We'll delete this current node now");
-        l.deleteE();
+        l.display();
+
+        System.out.println("Enter the index at which you want to delete the node:");
+
+      //  int index=scanner.nextInt();
+       // l.deleteE(index);
 
     }
 }
