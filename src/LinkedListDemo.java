@@ -29,22 +29,34 @@ public class LinkedListDemo {
 
     ListNode start;
     ListNode temp;
+    ListNode current;
 
     LinkedListDemo()
     {
         start=null;
     }
 
-    public Object insertE(Object data)
+    public void insertE(Object data)
     {
 
         if(start==null)
         {
-            start=new ListNode(data);
+            temp=new ListNode(data);
+            start=temp;
+            System.out.println("Data in start node :"+start.data);
         }
 
-        System.out.println("Data is: "+ start.data);
-        return start;
+        else {
+            temp = new ListNode(data);
+            current = start;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = temp;
+            System.out.println("Data is: "+ current.data);
+        }
+
+       // return start;
     }
 
 
@@ -67,10 +79,10 @@ public class LinkedListDemo {
         LinkedListDemo l=new LinkedListDemo();
 
         System.out.println("We'r going to insert a new node in our list");
-        l.insertE(10);
+       // l.insertE(10);
         l.insertE(20);
         l.insertE(30);
-       // l.display();
+
         System.out.println("We'll delete this current node now");
         l.deleteE();
 
