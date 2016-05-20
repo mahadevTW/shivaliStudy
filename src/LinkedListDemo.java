@@ -32,8 +32,7 @@ class ListNode
 public class LinkedListDemo {
 
     ListNode start;
-    ListNode temp,temp1,temp2;
-    ListNode current;
+    ListNode temp2;
     Scanner scanner=new Scanner(System.in);
 
     LinkedListDemo()
@@ -44,6 +43,7 @@ public class LinkedListDemo {
     public void insertE(Object data)
     {
 
+        ListNode temp,temp1,current;
         if(start==null)
         {
             temp=new ListNode(data);
@@ -67,6 +67,7 @@ public class LinkedListDemo {
 
     public void insertS(Object data)
     {
+        ListNode temp;
         temp=new ListNode(data);
         temp.next=start;
         start=temp;
@@ -75,6 +76,10 @@ public class LinkedListDemo {
 
     public  void  insertM(Object data)
     {
+        ListNode temp;
+        ListNode temp1;
+       // ListNode temp2;
+
         int count=0;
         System.out.println("Enter node after which you want to insert data");
         int index=scanner.nextInt();
@@ -85,16 +90,18 @@ public class LinkedListDemo {
             temp=temp.next;
             temp1=temp.next.next;
             count++;
+            System.out.println("Count :"+count);
         }
 
-        temp2.next=new ListNode(data);
+        temp2=new ListNode(data);
         temp.next=temp2;
         temp2.next=temp1;
-        System.out.println("Data in middle is :"+temp.getData());
+        System.out.println("Data in middle is :"+temp2.getData());
     }
 
     public void display()
     {
+        ListNode current;
         current=start;
         System.out.println("List is :");
         while(current.next!=null)
@@ -107,6 +114,7 @@ public class LinkedListDemo {
 
     public  Object  deleteE(int index)
     {
+        ListNode temp;
         int count = 0;
         if (start == null) {
             return null;
