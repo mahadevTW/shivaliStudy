@@ -152,23 +152,43 @@ public class LinkedListDemo {
 
     }
 
+    void removeDuplicates()
+    {
+        ListNode curr=start;
+        ListNode curr_next,curr1;
+
+        while(curr!=null)
+        {
+            if(curr.getData()==curr.next.getData() && curr!=null)
+            {
+                curr_next=curr.next.next;
+                curr.next=curr_next;
+            }
+            else
+            {
+                curr=curr.next;
+            }
+        }
+    }
+
     public static void main(String[] args) {
 
         LinkedListDemo l=new LinkedListDemo();
                 System.out.println("We'r going to insert a new node in our list");
-        l.insertE(10);
         l.insertE(20);
-        l.insertS(30);
+        l.insertE(30);
+        l.insertS(20);
         l.insertE(40);
-        l.insertS(50);
+        l.insertS(10);
         l.display();
-        l.insertE(70);
+       // l.insertE(70);
                //l.display();
-        l.insertM(60);
+       // l.insertM(60);
 
-        l.display();
-        l.deleteNode();
-        System.out.println("After deletion");
+       // l.display();
+        //l.deleteNode();
+        //System.out.println("After deletion");
+        l.removeDuplicates();
         l.display();
 
 
