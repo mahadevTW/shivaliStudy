@@ -34,7 +34,7 @@ class ListNode
 
 public class LinkedListDemo {
 
-    ListNode start;
+    static ListNode start;
 
     Scanner scanner=new Scanner(System.in);
 
@@ -206,8 +206,8 @@ public class LinkedListDemo {
 
     void insertinSortedOrder( Object data)
     {
-        ListNode curr;
-        ListNode newNode=new ListNode(data);
+        ListNode curr=start;
+        ListNode newNode = new ListNode(data);
 
         int startData=(Integer)start.getData();
         int newNodedata =(Integer)newNode.getData();
@@ -219,25 +219,82 @@ public class LinkedListDemo {
         }
         else
         {
-            curr=start;
             int curr_data= (Integer)curr.next.getData();
-
-            while(curr.next!=null && curr_data <newNodedata)
+            while(curr.next!=null && curr_data < newNodedata)
             {
                 curr=curr.next;
             }
+            System.out.println("Start Data "+startData+" New Node data "+newNodedata+" Current Data "+curr_data);
+
+            if(curr.next==null) {
+                 System.out.println("curr next pointer is null");
+             }
+            else
+             {
+                 System.out.println("cuu next pointer in not null");
+             }
+
+            //Link is not being created...Here's a problem.
             newNode.next=curr.next;
             curr.next=newNode;
+
+            if(newNode.next==null) {
+                System.out.println("newnode next pointer is null");
+            }
+            else
+            {
+                System.out.println("newnode next pointer in not null");
+            }
+            //System.out.println("New Node Next Data "+curr.next.getData());
+
         }
+    }
+
+    void pairwiseSwap()
+    {
+        ListNode curr=start;
+        ListNode tem =new ListNode(90);
+
+        while(curr!=null && curr.next!=null)
+        {
+            tem.setData(curr.getData());
+            curr.setData(curr.next.getData());
+            curr.next.setData(tem.getData());
+
+            curr=curr.next.next;
+
+        }
+    }
+
+    void recursivereverseLL(ListNode start)
+    {
+        if(start==null)
+            return;
+
+        recursivereverseLL(start.next);
+        System.out.println("Data in reverse is "+start.getData());
+    }
+
+    void alternateNode(ListNode start)
+    {
+        if(start==null)
+            return;
+        System.out.println("Data is "+start.getData());
+
+        if(start.next!=null)
+        {
+            alternateNode(start.next.next);
+        }
+        System.out.println("Data after second if is "+start.getData());
     }
 
     public static void main(String[] args) {
 
         LinkedListDemo l=new LinkedListDemo();
-                System.out.println("We'r going to insert a new node in our list");
+        System.out.println("We'r going to insert a new node in our list");
         l.insertE(20);
         l.insertE(30);
-        l.insertS(20);
+        //l.insertS(20);
         l.insertE(40);
         l.insertS(10);
         l.display();
@@ -251,7 +308,10 @@ public class LinkedListDemo {
        // l.removeDuplicates();
        // l.addLastNodeToFirst();
        // l.delAlternateNodes();
-        l.insertinSortedOrder(25);
+       // l.insertinSortedOrder(25);     //Function doest work accordingly.
+       // l.pairwiseSwap();
+       // l.recursivereverseLL(start);
+        l.alternateNode(start);
         l.display();
 
 
