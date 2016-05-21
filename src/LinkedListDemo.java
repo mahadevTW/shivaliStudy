@@ -159,7 +159,7 @@ public class LinkedListDemo {
 
         while(curr!=null)
         {
-            if(curr.getData()==curr.next.getData() && curr!=null)
+            if(curr.getData()==curr.next.getData() && curr.next!=null)
             {
                 curr_next=curr.next.next;
                 curr.next=curr_next;
@@ -169,6 +169,27 @@ public class LinkedListDemo {
                 curr=curr.next;
             }
         }
+    }
+
+    void addLastNodeToFirst()
+    {
+        ListNode last,secLast;
+        last=start;
+        secLast=null;
+        while (last.next!=null)
+        {
+           secLast=last;
+            last=last.next;
+        }
+        secLast.next=null;
+        last.next=start;
+
+        start=last;
+    }
+
+    void delAlternateNodes()
+    {
+
     }
 
     public static void main(String[] args) {
@@ -188,7 +209,8 @@ public class LinkedListDemo {
        // l.display();
         //l.deleteNode();
         //System.out.println("After deletion");
-        l.removeDuplicates();
+       // l.removeDuplicates();
+        l.addLastNodeToFirst();
         l.display();
 
 
