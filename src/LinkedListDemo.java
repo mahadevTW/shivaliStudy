@@ -1,8 +1,9 @@
-import java.util.Scanner;
 
-/**
- * Created by shivali on 18-May-16.
- */
+        import java.util.Scanner;
+
+        /**
+ - * Created by shivali on 18-May-16.
+ - */
 
 class ListNode
 {
@@ -28,11 +29,13 @@ class ListNode
     public void setData(Object data) {
         this.data = data;
     }
+
 }
+
 public class LinkedListDemo {
 
     ListNode start;
-    ListNode temp2;
+
     Scanner scanner=new Scanner(System.in);
 
     LinkedListDemo()
@@ -49,6 +52,7 @@ public class LinkedListDemo {
             temp=new ListNode(data);
             start=temp;
             System.out.println("Data in start node :"+ temp.getData());
+                        return;
         }
 
         else {
@@ -62,7 +66,7 @@ public class LinkedListDemo {
             System.out.println("Data is: " + temp1.getData());
         }
 
-       // return start;
+        // return start;
     }
 
     public void insertS(Object data)
@@ -76,27 +80,27 @@ public class LinkedListDemo {
 
     public  void  insertM(Object data)
     {
-        ListNode temp;
-        ListNode temp1;
-       // ListNode temp2;
 
-        int count=0;
-        System.out.println("Enter node after which you want to insert data");
+                System.out.println("Enter Index at which you want to insert data");
         int index=scanner.nextInt();
-        temp=start;
-        temp1=temp;
-        while (count!=index);
-        {
-            temp=temp.next;
-            temp1=temp.next.next;
-            count++;
-            System.out.println("Count :"+count);
-        }
 
-        temp2=new ListNode(data);
-        temp.next=temp2;
-        temp2.next=temp1;
-        System.out.println("Data in middle is :"+temp2.getData());
+                if(index <1){
+                    insertS(data);
+                    return;
+    }
+
+                ListNode temp = start;
+                while (index >1 &&temp !=null){
+                    temp = temp.next;
+                    index --;
+                }
+                if(temp ==null){
+                    System.out.println("Index is Bigger than the List..");
+                    return;
+                }
+                ListNode temp1 =new ListNode(data);
+                temp1.next = temp.next;
+                temp.next = temp1;
     }
 
     public void display()
@@ -104,36 +108,45 @@ public class LinkedListDemo {
         ListNode current;
         current=start;
         System.out.println("List is :");
-        while(current.next!=null)
-        {
-            current=current.next;
-            System.out.println(current.getData());
-        }
+
+                while(current!=null)
+    {
+
+        System.out.println(current.getData());
+                    current=current.next;                //just rearranged statments.
+
+    }
     }
 
 
-    public  Object  deleteE(int index)
+
+       public  void deleteNode()
     {
-        ListNode temp;
-        int count = 0;
-        if (start == null) {
-            return null;
+
+        if (start == null)
+        {
+
+                    System.out.println("List Is empty");
+                      return;
         } else
         {
 
-            temp = start;
-            while (temp.next != null) {
-                if (count == index)
-                    break;
-                count++;
-                System.out.println("Count: "+count+"Index: "+index);
-                temp = temp.next;
-            };
-            System.out.println("Data to be deleted is:" + temp.getData());
-            temp.setData(null);
-            System.out.println("Data to be deleted is:" + temp.getData());
+                        System.out.println("Enter data you want to delete");
+                        int dataToDelete = scanner.nextInt();
+                        ListNode temp,temp1;
+                        int count = 0;
+                        temp = temp1=start;
 
-            return temp;
+                                while ((temp != null) && (dataToDelete !=(Integer)(temp.getData()))) {
+                            temp1 = temp;
+                            temp =temp.next;
+                        }
+                        if(temp ==null){
+                            System.out.println("Data not found");
+                            return;
+                        }
+                        //data found delete the data..
+                               temp1.next = temp.next;  //delete the data at temp location..
         }
 
 
@@ -142,22 +155,26 @@ public class LinkedListDemo {
     public static void main(String[] args) {
 
         LinkedListDemo l=new LinkedListDemo();
-
-        System.out.println("We'r going to insert a new node in our list");
+                System.out.println("We'r going to insert a new node in our list");
         l.insertE(10);
         l.insertE(20);
         l.insertS(30);
         l.insertE(40);
         l.insertS(50);
         l.display();
+        l.insertE(70);
+               //l.display();
         l.insertM(60);
 
         l.display();
+        l.deleteNode();
+        System.out.println("After deletion");
+        l.display();
 
-        System.out.println("Enter the index at which you want to delete the node:");
 
-      //  int index=scanner.nextInt();
-       // l.deleteE(index);
+          }
 
-    }
+
+
+
 }
