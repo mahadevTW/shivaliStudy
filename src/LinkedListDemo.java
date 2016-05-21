@@ -189,6 +189,18 @@ public class LinkedListDemo {
 
     void delAlternateNodes()
     {
+        ListNode curr,curr_next;
+        curr=start;
+        curr_next=curr.next;
+
+        while(curr!=null && curr_next!=null)
+        {
+            curr.next=curr_next.next;
+            curr=curr.next;
+            //Instead if we use curr_next=curr_next.next then at second iteration both point to same node and so create problem
+            if(curr!=null)
+                curr_next=curr.next;
+        }
 
     }
 
@@ -210,7 +222,8 @@ public class LinkedListDemo {
         //l.deleteNode();
         //System.out.println("After deletion");
        // l.removeDuplicates();
-        l.addLastNodeToFirst();
+       // l.addLastNodeToFirst();
+        l.delAlternateNodes();
         l.display();
 
 
