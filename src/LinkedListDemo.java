@@ -204,6 +204,33 @@ public class LinkedListDemo {
 
     }
 
+    void insertinSortedOrder( Object data)
+    {
+        ListNode curr;
+        ListNode newNode=new ListNode(data);
+
+        int startData=(Integer)start.getData();
+        int newNodedata =(Integer)newNode.getData();
+
+        if(start==null|| startData > newNodedata)
+        {
+            newNode.next=start;
+            start=newNode;
+        }
+        else
+        {
+            curr=start;
+            int curr_data= (Integer)curr.next.getData();
+
+            while(curr.next!=null && curr_data <newNodedata)
+            {
+                curr=curr.next;
+            }
+            newNode.next=curr.next;
+            curr.next=newNode;
+        }
+    }
+
     public static void main(String[] args) {
 
         LinkedListDemo l=new LinkedListDemo();
@@ -223,7 +250,8 @@ public class LinkedListDemo {
         //System.out.println("After deletion");
        // l.removeDuplicates();
        // l.addLastNodeToFirst();
-        l.delAlternateNodes();
+       // l.delAlternateNodes();
+        l.insertinSortedOrder(25);
         l.display();
 
 
