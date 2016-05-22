@@ -288,15 +288,136 @@ public class LinkedListDemo {
         System.out.println("Data after second if is "+start.getData());
     }
 
+    void segregateEvnOdd()
+    {
+        ListNode End=start;
+        ListNode new_end=null;
+        ListNode curr=start;
+        int curr_data ;
+        ListNode prev=null;
+
+        while (End!= null && End.next!=null)
+        {
+            End=End.next;
+        }
+        new_end=End;
+        curr_data=(Integer)curr.getData();
+
+        //Finds odd node and links them to new_end of last node of original list.
+        while (curr_data %2 !=0 && curr !=End)
+        {
+
+            System.out.println("Current data "+curr_data);
+            new_end.next=curr;
+            curr=curr.next;
+            new_end.next.next=null;
+            new_end=new_end.next;
+            curr_data=(Integer)curr.getData();
+
+        }
+
+        //For even node in list
+        if(curr_data%2==0)
+        {
+
+            start=curr;
+            while (curr!=End)
+            {
+                if(curr_data%2==0 && curr!= null)
+                {
+                    prev=curr;
+                    curr=curr.next;
+                    curr_data=(Integer)curr.getData();
+                   // System.out.println("Current data ... "+curr_data);
+                }
+                else
+                {
+                       System.out.println("Current data ... "+curr_data);
+                        prev.next = curr.next;
+                        curr.next = null;
+                        new_end.next = curr;
+                        new_end = curr;
+                        curr = prev.next;
+                        curr_data=(Integer)curr.getData();
+                        System.out.println("Current data !!! "+curr_data);
+                }
+            }
+        }
+
+        else
+            prev =curr;
+
+        int end_data=(Integer)End.getData();
+        if (new_end != End && end_data%2 !=0)
+        {
+            prev.next=End.next;
+            End.next=null;
+            new_end.next=End;
+        }
+        return;
+
+    }
+
+    public void pairwiseSwapByLinks()
+    {
+        ListNode prev=start;
+        ListNode curr=start.next;
+
+        start=curr;
+
+        while(true)
+        {
+            ListNode next1=curr.next;
+            curr.next=prev;
+
+            if(next1== null || next1.next==null)
+            {
+                prev.next=next1;
+                break;
+            }
+            prev.next=next1.next;
+
+            prev=next1;
+            curr=prev.next;
+
+        }
+
+    }
+
+    void rotateLL(int k)
+    {
+        ListNode curr=start;
+        int count=1;
+        ListNode kthNode;
+
+        while (curr!=null && count<k)
+        {
+            curr=curr.next;
+        }
+
+        kthNode=curr;
+
+        while (curr !=null && curr.next!=null)
+        {
+            curr=curr.next;
+        }
+
+        curr.next=start;
+        start=kthNode.next;
+        kthNode.next=null;
+
+    }
+
     public static void main(String[] args) {
 
         LinkedListDemo l=new LinkedListDemo();
         System.out.println("We'r going to insert a new node in our list");
-        l.insertE(20);
-        l.insertE(30);
+        l.insertE(2);
+        l.insertE(3);
         //l.insertS(20);
-        l.insertE(40);
-        l.insertS(10);
+        l.insertE(4);
+        l.insertE(5);
+        l.insertS(1);
         l.display();
        // l.insertE(70);
                //l.display();
@@ -311,7 +432,10 @@ public class LinkedListDemo {
        // l.insertinSortedOrder(25);     //Function doest work accordingly.
        // l.pairwiseSwap();
        // l.recursivereverseLL(start);
-        l.alternateNode(start);
+        //l.alternateNode(start);
+        //l.segregateEvnOdd();
+        //l.pairwiseSwapByLinks();
+        l.rotateLL(3);
         l.display();
 
 

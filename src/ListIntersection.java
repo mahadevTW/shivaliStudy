@@ -7,7 +7,7 @@ import java.util.Scanner;
 class ListNode4
 {
     private Object data;
-    ListNode4 next;
+    ListNode5 next;
 
     ListNode4(Object data)
     {
@@ -32,7 +32,7 @@ class ListNode4
 }
 public class ListIntersection {
 
-    static ListNode4 start , start1;
+    static ListNode5 start , start1;
 
     Scanner scanner=new Scanner(System.in);
 
@@ -45,10 +45,10 @@ public class ListIntersection {
     public void insertE(Object data)
     {
 
-        ListNode4 temp,temp1,current;
+        ListNode5 temp,temp1,current;
         if(start==null || start1==null)
         {
-            temp=new ListNode4(data);
+            temp=new ListNode5(data);
             start=temp;
             System.out.println("Data in start node :"+ temp.getData());
             return;
@@ -56,7 +56,7 @@ public class ListIntersection {
 
         else {
 
-            temp1 = new ListNode4(data);
+            temp1 = new ListNode5(data);
             current = start;
             while (current.next != null) {
                 current = current.next;
@@ -71,10 +71,10 @@ public class ListIntersection {
     public void insertE2(Object data)
     {
 
-        ListNode4 temp,temp1,current;
+        ListNode5 temp,temp1,current;
         if( start1==null)
         {
-            temp=new ListNode4(data);
+            temp=new ListNode5(data);
             start1=temp;
             System.out.println("Data in start node :"+ temp.getData());
             return;
@@ -82,7 +82,7 @@ public class ListIntersection {
 
         else {
 
-            temp1 = new ListNode4(data);
+            temp1 = new ListNode5(data);
             current = start1;
             while (current.next != null) {
                 current = current.next;
@@ -96,7 +96,7 @@ public class ListIntersection {
 
     public void display1()
     {
-        ListNode4 current;
+        ListNode5 current;
         current=start1;
         System.out.println("List is :");
 
@@ -111,7 +111,7 @@ public class ListIntersection {
 
     public void display()
     {
-        ListNode4 current;
+        ListNode5 current;
         current=start;
         System.out.println("List is :");
 
@@ -123,7 +123,7 @@ public class ListIntersection {
         }
     }
 
-    int getIntersectionNode( ListNode4 start,ListNode4 start1)
+    int getIntersectionNode(ListNode5 start, ListNode5 start1)
     {
 
         int c1=getCount(start);
@@ -145,9 +145,9 @@ public class ListIntersection {
 
     }
 
-    private int getCount(ListNode4 start) {
+    private int getCount(ListNode5 start) {
 
-        ListNode4 curr=start;
+        ListNode5 curr=start;
         int count=0;
         while(curr !=null)
         {
@@ -157,12 +157,12 @@ public class ListIntersection {
         return count;
     }
 
-    int getIntersectionNode(int d,ListNode4 start,ListNode4 start1)
+    int getIntersectionNode(int d, ListNode5 start, ListNode5 start1)
     {
 
         int i,j;
-        ListNode4 curr=start;
-        ListNode4 curr1=start1;
+        ListNode5 curr=start;
+        ListNode5 curr1=start1;
         for(i=0;i<4;i++)
         {
             for(j=0;j<3;i++)
@@ -189,19 +189,19 @@ public class ListIntersection {
     public static void main(String[] args) {
 
         ListIntersection l=new ListIntersection();
-        ListNode4 res = null;
+        ListNode5 res = null;
 
-        l.start=new ListNode4(10);
-        l.start.next=new ListNode4(20);
-        l.start.next.next=new ListNode4(30);
-        l.start.next.next.next=new ListNode4(40);
+        l.start=new ListNode5(10);
+        l.start.next=new ListNode5(20);
+        l.start.next.next=new ListNode5(30);
+        l.start.next.next.next=new ListNode5(40);
 
 
         l.display();
 
-        l.start1=new ListNode4(70);
-        l.start1.next=new ListNode4(30);
-        l.start1.next.next=new ListNode4(40);
+        l.start1=new ListNode5(70);
+        l.start1.next=new ListNode5(30);
+        l.start1.next.next=new ListNode5(40);
 
         l.display1();
 
