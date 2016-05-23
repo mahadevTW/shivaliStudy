@@ -87,7 +87,7 @@ public class LinkedListDemo {
                 if(index <1){
                     insertS(data);
                     return;
-    }
+                }
 
                 ListNode temp = start;
                 while (index >1 &&temp !=null){
