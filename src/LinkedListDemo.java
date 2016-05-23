@@ -390,14 +390,15 @@ public class LinkedListDemo {
         int count=1;
         ListNode kthNode;
 
-        while (curr!=null && count<k)
+        while (curr.next!=null && count< k)
         {
             curr=curr.next;
+            count++;
         }
 
         kthNode=curr;
 
-        while (curr !=null && curr.next!=null)
+        while ( curr.next!=null && curr !=null)
         {
             curr=curr.next;
         }
@@ -408,16 +409,70 @@ public class LinkedListDemo {
 
     }
 
+    void delMNodeAftrNNode(int m,int n)
+    {
+        ListNode curr,temp1;
+        curr=temp1=start;
+
+        int count=1,count1=1;
+        while (curr!=null && curr.next!=null)
+        {
+            while (curr.next != null && count < m) {
+                curr = curr.next;
+                temp1 = temp1.next;
+                count++;
+            }
+
+            while (count1 < n && temp1.next != null ) {
+                temp1 = temp1.next;
+                count1++;
+            }
+
+            curr.next = temp1.next.next;
+            temp1 = temp1.next;
+            curr = temp1;
+        }
+
+    }
+
+    void delLargeValue()
+    {
+        ListNode curr=start;
+        ListNode curr1;
+        int curr_data,curr_nxt_data;
+
+        while(curr!=null && curr.next!=null)
+        {
+            curr_data=(Integer) curr.getData();
+            curr_nxt_data=(Integer) curr.next.getData();
+
+            curr1=curr;
+            curr=curr.next;
+            if(curr_data < curr_nxt_data)
+            {
+                start=curr;
+                curr=curr.next;
+                curr1=curr1.next;
+            }
+            curr=curr.next;
+
+        }
+    }
+
     public static void main(String[] args) {
 
         LinkedListDemo l=new LinkedListDemo();
         System.out.println("We'r going to insert a new node in our list");
+        l.insertE(15);
+        l.insertE(10);
+        //l.insertS(20);
+        l.insertE(11);
+        l.insertE(5);
+        l.insertE(6);
         l.insertE(2);
         l.insertE(3);
-        //l.insertS(20);
-        l.insertE(4);
-        l.insertE(5);
-        l.insertS(1);
+       // l.insertE(9);
+        l.insertS(12);
         l.display();
        // l.insertE(70);
                //l.display();
@@ -435,7 +490,9 @@ public class LinkedListDemo {
         //l.alternateNode(start);
         //l.segregateEvnOdd();
         //l.pairwiseSwapByLinks();
-        l.rotateLL(3);
+        //l.rotateLL(3);
+        //l.delMNodeAftrNNode(2,2);
+        l.delLargeValue();
         l.display();
 
 
