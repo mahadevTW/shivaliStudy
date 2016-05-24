@@ -1,5 +1,6 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Stack;
 
 //I'm facing problem to create two stacks and implement for by stack create queue.
 
@@ -39,114 +40,56 @@ class  StackNode2
 
 public class QueueByStackScratch {
 
-    StackNode2 top;
-   /* QueueByStackScratch s1=new QueueByStackScratch();
-    QueueByStackScratch s2=new QueueByStackScratch();
-*/
-    //StackNode2 s1=new StackNode2();
-    //StackNode2 s2=new StackNode2();
+Stack<Integer> stack1 ;
+Stack<Integer> stack2 ;
 
-    int size=0;
-
-    public int getSize() {
-        return size;
+    public QueueByStackScratch(){
+        stack1 = new Stack<Integer>();
+        stack2 = new Stack<Integer>();
     }
 
-    private boolean isEmpty()
-    {
-        return  top==null;
-    }
-
-    public  void  push(Object data)
-    {
-        StackNode2 newNode=new StackNode2(data,null);
-        if (top==null)
-        {
-            top=newNode;
+    public void enQueue(int data){
+        if(stack1.isEmpty()){
+            stack1.push(data);
+            return;
         }
-        else
-        {
-            newNode.next=top;
-            top=newNode;
+        while(!stack1.isEmpty()){
+            stack2.push(stack1.pop());
         }
-        size++;
-    }
-
-
-    public Object pop()
-    {
-        if (isEmpty())
-        {
-            throw new NoSuchElementException("Underflow Exception");
-        }
-        StackNode2 temp=top;
-        top=temp.getLink();
-        size--;
-        return  temp.getData();
-
-    }
-
- /*   public  void enqueue(Object data)
-    {
-        if(s1.size==0) {
-            s1.push(data);
-            System.out.println("S1.data" + top.getData());
-        }
-        else
-        {
-            int l=s1.size;
-            for (int i=0;i<l;i++)
-                s2.push(s1.pop());
-            s1.push(data);
-
-            for (int i=0;i<l;i++)
-                s1.push(s2.pop());
+        stack1.push(data);
+        while (!stack2.isEmpty()){
+            stack1.push(stack2.pop());
         }
     }
-
-    public Object dequeue()
-    {
-        System.out.println("Deleting a element");
-        if(s1.size==0)
-            throw new NoSuchElementException("Underflow Exception");
-        else
-            return s1.pop();
+    public int deQueue(){
+        while(!stack1.isEmpty()){
+            stack2.push(stack1.pop());
+        }
+        int data = stack2.pop();
+        while (!stack2.isEmpty()){
+            stack1.push(stack2.pop());
+        }
+        return data;
     }
-    */
 
     public void display()
     {
-        System.out.println("Displaying Stack: ");
-        if(top==null) {
-            System.out.println("Queue is empty");
-            return;
-        }
-
-        StackNode2 temp=top;
-        while (temp!=null)
-        {
-            System.out.println(temp.getData()+" ");
-            temp=temp.next;
+    Iterator i = stack1.iterator();
+        while (i.hasNext()){
+            System.out.println(i.next());
         }
     }
 
     public static void main(String[] args)
     {
-        QueueByStackScratch q=new QueueByStackScratch();
-
-       /* q.enqueue(10);
-        q.enqueue(20);
-        q.enqueue(30);
-*/      q.push(10);
-        q.push(20);
-        q.push(30);
-        q.display();
-
-        q.pop();
-       // q.dequeue();
-        q.display();
-
-
+        QueueByStackScratch queueByStackScratch=new QueueByStackScratch();
+        queueByStackScratch.enQueue(10);
+        queueByStackScratch.enQueue(20);
+        queueByStackScratch.enQueue(30);
+        queueByStackScratch.enQueue(40);
+        queueByStackScratch.display();
+        System.out.println("Element dequed.."+queueByStackScratch.deQueue());
+        queueByStackScratch.display();
 
 
     }
