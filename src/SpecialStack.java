@@ -37,7 +37,8 @@ class  StackNode1
 
 public class SpecialStack
 {
-    StackNode1 top,min;
+    StackNode1 top;
+    SpecialStack min;
     int size=0;
 
     public StackNode1 push(Object data)
@@ -75,19 +76,63 @@ public class SpecialStack
         if(isEmpty())
         {
             top=push(data);
-            min=push(data);
+            System.out.println("Top "+top.getData());
+            min.push(data);
         }
         else
         {
             top=push(data);
-            //Half implementation left .
+            int  top_data=(Integer) data;
+            int y=(Integer) pop();//Half implementation left .
+            min.push(y);
+            if(top_data < y)
+            {
+                min.push(top_data);
+            }
+            else
+            {
+                min.push(y);
+            }
         }
     }
 
+    public Object SpecialPop()
+    {
+        int x=(Integer) pop();
+        min.pop();
+        return  x;
 
+    }
+
+    public Object SpecialGetMin()
+    {
+        if (min==null)
+            System.out.println("Stack is empty");
+
+        Object x= min.pop();
+        int x_data=0;
+        if(x!=null)
+            x_data=(Integer)x;
+        min.push(x_data);
+        return x;
+    }
 
     public boolean isEmpty() {
         return true;
+    }
+
+    public static void main(String[] args)
+    {
+        SpecialStack specialStack=new SpecialStack();
+
+        specialStack.SpecialPush(10);
+        specialStack.SpecialPush(20);
+        specialStack.SpecialPush(30);
+
+        System.out.println("Minimum is "+specialStack.SpecialGetMin());
+
+        specialStack.SpecialPush(5);
+        System.out.println("Minimum is "+specialStack.SpecialGetMin());
     }
 }
 
